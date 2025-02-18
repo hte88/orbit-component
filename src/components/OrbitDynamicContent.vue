@@ -3,7 +3,11 @@ import { Icon } from '@iconify/vue';
 import OrbitLink from './OrbitLink.vue';
 import type { ItemCircle } from './../models/orbit';
 
-defineProps<ItemCircle>();
+interface CustomClassContent extends ItemCircle {
+  customClassContent?:string
+}
+
+defineProps<CustomClassContent>();
 </script>
 
 <template>
@@ -12,17 +16,17 @@ defineProps<ItemCircle>();
   >
     <OrbitLink :href>
       <template v-if="!$slots[type]">
-        <span v-if="type === 'string'" :class="class">{{ content }}</span>
+        <span v-if="type === 'string'" :class="customClassContent">{{ content }}</span>
 
-        <Icon v-else-if="type === 'icon'" :icon="content" :class="class"></Icon>
+        <Icon v-else-if="type === 'icon'" :icon="content" :class="customClassContent"></Icon>
 
         <img
           v-else-if="type === 'image'"
           :src="content"
-          :class="class"
+          :class="customClassContent"
           :alt="alt || content"
         />
-        <div v-else :class="class"></div>
+        <div v-else :class="customClassContent"></div>
       </template>
     </OrbitLink>
   </div>

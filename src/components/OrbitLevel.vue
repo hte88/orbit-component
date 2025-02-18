@@ -115,7 +115,7 @@ function getItemCustomClass(item: CustomClass) {
             <OrbitDynamicContent
               :type="item?.type"
               :content="item?.content"
-              :class="item?.customClass?.content"
+              :custom-class-content="item?.customClass?.content"
               :alt="item?.alt"
               :href="item?.href"
             />
