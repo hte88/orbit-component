@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import OrbitLevel from './OrbitLevel.vue'
+import { computed, type PropType} from 'vue';
+import OrbitLevel from './OrbitLevel.vue';
+import type { ItemCircle, Ui} from './../models/orbit'
 
 const props = defineProps({
   navigationLevels: {
-    type: Array,
+    type: Array as PropType<ItemCircle[][]>,
     required: true,
     default: () => [],
   },
@@ -28,32 +29,34 @@ const props = defineProps({
     type: Number,
     default: 2.5,
   },
-  orbitColor: {
-    type: String,
-    default: 'rgb(243, 244, 246)',
-  },
-  orbitOpacity: {
+  orbitLevelDiameter: {
     type: Number,
-    default: 0.3,
+    default: 10,
   },
-  glowTheme: {
-    type: Object,
+  glow: {
+    type: Boolean,
+    default: true,
+  },
+  ui: {
+    type: Object as PropType<Ui>,
     default: () => ({
-      primary: 'rgba(255, 255, 255, 0.8)',
-      secondary: 'rgba(70, 131, 255, 0.8)',
-      highlight: 'rgba(255, 255, 255, 0.8)',
+      glowColors: {
+        center: '#FFFFFF',
+        edge: '#FFD900FF',
+      },
+      bg: '#ffffff',
+      border: {
+        color: '#e2e8f0',
+        opacity: '',
+      },
     }),
   },
-  itemSize: {
-    type: String,
-    default: '30px',
-  },
-})
+});
 
 const containerStyle = computed(() => ({
   width: `${props.orbitDiameter}px`,
   height: `${props.orbitDiameter}px`,
-}))
+}));
 
 const orbitSettings = computed(() => ({
   baseSpeed: props.orbitSpeed,
@@ -61,14 +64,16 @@ const orbitSettings = computed(() => ({
   glowSpeedRatio: props.glowSpeedRatio,
   diameter: props.orbitDiameter,
   spacing: props.levelSpacing,
-}))
+  glow: props.glow
+}));
 
 const styleSettings = computed(() => ({
-  orbitColor: props.orbitColor,
-  orbitOpacity: props.orbitOpacity,
-  glowTheme: props.glowTheme,
-  itemSize: props.itemSize,
-}))
+  orbitColor: props.ui.bg,
+  glowColors: props.ui.glowColors,
+  orbitLevelDiameter: props.orbitLevelDiameter,
+  borderColor: props.ui.border?.color,
+  borderOpacity: props.ui.border?.opacity,
+}));
 </script>
 <template>
   <div class="relative mx-auto my-12" :style="containerStyle">
@@ -76,6 +81,7 @@ const styleSettings = computed(() => ({
       <OrbitLevel
         :level-data="level"
         :level-index="levelIndex"
+        :orbit-level-diameter="10"
         :orbit-settings="orbitSettings"
         :style-settings="styleSettings"
       />

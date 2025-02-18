@@ -1,4 +1,5 @@
-<script setup lang="ts">import OrbitBorderGlow from './OrbitBorderGlow.vue'
+<script setup lang="ts">
+import OrbitBorderGlow from './OrbitBorderGlow.vue';
 
 defineProps({
   color: {
@@ -7,9 +8,12 @@ defineProps({
   },
   opacity: {
     type: Number,
-    default: 0.3,
+    default: 1,
   },
-  glowTheme: {
+  glow: {
+    type: Boolean,
+  },
+  glowColors: {
     type: Object,
     required: true,
   },
@@ -17,7 +21,7 @@ defineProps({
     type: Number,
     required: true,
   },
-})
+});
 </script>
 
 <template>
@@ -29,6 +33,6 @@ defineProps({
         opacity: opacity,
       }"
     />
-    <OrbitBorderGlow :color :opacity :glow-theme :rotation-duration />
+    <OrbitBorderGlow v-if="glow" :color :opacity :glow-colors :rotation-duration />
   </div>
 </template>
