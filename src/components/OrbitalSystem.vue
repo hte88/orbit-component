@@ -1,50 +1,50 @@
 <script setup lang="ts">
 import { computed, type PropType } from 'vue';
-import OrbitLevel from './OrbitLevel.vue';
-import type { ItemCircle, Ui } from './../models/orbit';
+import OrbitalRing from './OrbitalRing.vue';
+import type { OrbitalElement, OrbitalTheme } from '../models/orbit.ts';
 
 const props = defineProps({
-  navigationLevels: {
-    type: Array as PropType<ItemCircle[][]>,
+  rings: {
+    type: Array as PropType<OrbitalElement[][]>,
     required: true,
     default: () => [],
   },
-  orbitDiameter: {
+  systemDiameter: {
     type: Number,
     default: 500,
   },
-  levelSpacing: {
+  ringSpacing: {
     type: Number,
     default: 100,
   },
-  orbitSpeed: {
+  rotationSpeed: {
     type: Number,
     default: 30,
   },
-  speedIncrement: {
+  speedMultiplier: {
     type: Number,
     default: 1,
   },
-  glowSpeedRatio: {
+  glowRotationRatio: {
     type: Number,
     default: 2.5,
   },
-  orbitLevelDiameter: {
+  elementDiameter: {
     type: Number,
-    default: 10,
+    default: 30,
   },
-  glow: {
+  enableGlow: {
     type: Boolean,
     default: true,
   },
-  ui: {
-    type: Object as PropType<Ui>,
+  theme: {
+    type: Object as PropType<OrbitalTheme>,
     default: () => ({
-      glowColors: {
+      glow: {
         center: '#FFFFFF',
         edge: '#FFD900FF',
       },
-      bg: '#ffffff',
+      background: '#ffffff',
       border: {
         color: '#e2e8f0',
         opacity: 1,
@@ -54,34 +54,34 @@ const props = defineProps({
 });
 
 const containerStyle = computed(() => ({
-  width: `${props.orbitDiameter}px`,
-  height: `${props.orbitDiameter}px`,
+  width: `${props.systemDiameter}px`,
+  height: `${props.systemDiameter}px`,
 }));
 
 const orbitSettings = computed(() => ({
-  baseSpeed: props.orbitSpeed,
-  speedIncrement: props.speedIncrement,
-  glowSpeedRatio: props.glowSpeedRatio,
-  diameter: props.orbitDiameter,
-  spacing: props.levelSpacing,
-  glow: props.glow,
+  baseSpeed: props.rotationSpeed,
+  speedMultiplier: props.speedMultiplier,
+  glowRotationRatio: props.glowRotationRatio,
+  diameter: props.systemDiameter,
+  spacing: props.ringSpacing,
+  enableGlow: props.enableGlow,
 }));
 
 const styleSettings = computed(() => ({
-  orbitColor: props.ui.bg,
-  glowColors: props.ui.glowColors,
-  orbitLevelDiameter: props.orbitLevelDiameter,
-  borderColor: props.ui.border?.color,
-  borderOpacity: props.ui.border?.opacity,
+  background: props.theme.background,
+  glowStyle: props.theme.glow,
+  elementDiameter: props.elementDiameter,
+  borderColor: props.theme.border?.color,
+  borderOpacity: props.theme.border?.opacity,
 }));
 </script>
+
 <template>
   <div class="relative mx-auto my-12" :style="containerStyle">
-    <template v-for="(level, levelIndex) in navigationLevels" :key="levelIndex">
-      <OrbitLevel
-        :level-data="level"
-        :level-index="levelIndex"
-        :orbit-level-diameter="10"
+    <template v-for="(ring, ringIndex) in rings" :key="ringIndex">
+      <OrbitalRing
+        :elements="ring"
+        :ring-index="ringIndex"
         :orbit-settings="orbitSettings"
         :style-settings="styleSettings"
       />

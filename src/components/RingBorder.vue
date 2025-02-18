@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import OrbitBorderGlow from './OrbitBorderGlow.vue';
+import { type PropType } from 'vue';
+import RingGlow from './RingGlow.vue';
+import type { GlowStyle } from '../models/orbit';
 
 defineProps({
   color: {
@@ -10,11 +12,12 @@ defineProps({
     type: Number,
     default: 1,
   },
-  glow: {
+  enableGlow: {
     type: Boolean,
+    default: true,
   },
-  glowColors: {
-    type: Object,
+  glowStyle: {
+    type: Object as PropType<GlowStyle>,
     required: true,
   },
   rotationDuration: {
@@ -33,12 +36,12 @@ defineProps({
         opacity: opacity,
       }"
     />
-    <OrbitBorderGlow
-      v-if="glow"
-      :color
-      :opacity
-      :glow-colors
-      :rotation-duration
+    <RingGlow
+      v-if="enableGlow"
+      :color="color"
+      :opacity="opacity"
+      :glow-style="glowStyle"
+      :rotation-duration="rotationDuration"
     />
   </div>
 </template>

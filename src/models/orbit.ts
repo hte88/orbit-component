@@ -1,26 +1,30 @@
+export type ContentType = 'icon' | 'string' | 'image';
 
-export type Types = 'icon'| 'string'| 'image'
-
-interface Border {
-    color?: string
-    opacity?: string
+export interface BorderStyle {
+  color?: string;
+  opacity?: number;
 }
 
-interface GlowColors {
-    center?: string
-    edge?: string
+export interface GlowStyle {
+  center?: string;
+  edge?: string;
 }
 
-export interface ItemCircle {
-    type?: Types
-    content?: string
-    class?: string
-    href?: string
-    alt?: string
+export interface ElementStyle {
+  border?: string;
+  content?: string;
 }
 
-export interface Ui {
-    bg?: string
-    border?: Border
-    glowColors?: GlowColors
+export interface OrbitalElement {
+  type: ContentType;
+  content?: string;
+  style?: ElementStyle;
+  href?: string;
+  alt?: string;
+}
+
+export interface OrbitalTheme {
+  background?: string;
+  border?: BorderStyle;
+  glow?: GlowStyle;
 }
