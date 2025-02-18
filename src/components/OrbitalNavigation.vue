@@ -23,7 +23,7 @@ const props = defineProps({
   },
   speedIncrement: {
     type: Number,
-    default: 10,
+    default: 1,
   },
   glowSpeedRatio: {
     type: Number,
@@ -47,7 +47,7 @@ const props = defineProps({
       bg: '#ffffff',
       border: {
         color: '#e2e8f0',
-        opacity: '',
+        opacity: 1,
       },
     }),
   },
