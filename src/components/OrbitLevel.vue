@@ -4,6 +4,8 @@ import OrbitBorder from './OrbitBorder.vue';
 import OrbitDynamicContent from './OrbitDynamicContent.vue';
 import type { ItemCircle, CustomClass } from './../models/orbit';
 
+const DEFAULT_BORDER_CLASS = 'border-2 border-gray-800 hover:border-white'
+
 const props = defineProps({
   levelData: {
     type: Array as PropType<ItemCircle[]>,
@@ -48,12 +50,14 @@ const levelStyle = computed(() => {
   };
 });
 
+const animationState = computed(() => isHovered.value ? 'paused' : 'running')
+
 const rotationStyle = computed(() => ({
-  animation: `orbit ${rotationDuration.value}s linear infinite normal none ${isHovered.value ? 'paused' : 'running'}`,
+  animation: `orbit ${rotationDuration.value}s linear infinite normal none ${animationState.value}`,
 }));
 
 const counterRotationStyle = computed(() => ({
-  animation: `counterOrbit ${rotationDuration.value}s linear infinite normal none ${isHovered.value ? 'paused' : 'running'}`,
+  animation: `counterOrbit ${rotationDuration.value}s linear infinite normal none ${animationState.value}`,
 }));
 
 function getItemStyle(index: number, totalItems: number) {
@@ -77,7 +81,7 @@ function getItemStyle(index: number, totalItems: number) {
 function getItemCustomClass(item: CustomClass) {
   return item.border
     ? item.border
-    : 'border-2 border-gray-800 hover:border-white';
+    : DEFAULT_BORDER_CLASS;
 }
 </script>
 <template>
