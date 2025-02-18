@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, type PropType} from 'vue';
+import { computed, type PropType } from 'vue';
 import OrbitLevel from './OrbitLevel.vue';
-import type { ItemCircle, Ui} from './../models/orbit'
+import type { ItemCircle, Ui } from './../models/orbit';
 
 const props = defineProps({
   navigationLevels: {
@@ -64,7 +64,7 @@ const orbitSettings = computed(() => ({
   glowSpeedRatio: props.glowSpeedRatio,
   diameter: props.orbitDiameter,
   spacing: props.levelSpacing,
-  glow: props.glow
+  glow: props.glow,
 }));
 
 const styleSettings = computed(() => ({

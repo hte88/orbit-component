@@ -33,6 +33,12 @@ defineProps({
         opacity: opacity,
       }"
     />
-    <OrbitBorderGlow v-if="glow" :color :opacity :glow-colors :rotation-duration />
+    <OrbitBorderGlow
+      v-if="glow"
+      :color
+      :opacity
+      :glow-colors
+      :rotation-duration
+    />
   </div>
 </template>
