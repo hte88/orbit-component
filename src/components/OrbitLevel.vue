@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { computed,type PropType } from 'vue';
+import { computed, ref, type PropType } from 'vue';
 import OrbitBorder from './OrbitBorder.vue';
 import OrbitDynamicContent from './OrbitDynamicContent.vue';
-import {type Data} from './../models/orbit'
+import type { ItemCircle, CustomClass } from './../models/orbit';
 
 const props = defineProps({
   levelData: {
-    type: Array as PropType<Data[]>,
+    type: Array as PropType<ItemCircle[]>,
     required: true,
   },
   levelIndex: {
@@ -22,6 +22,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+const isHovered = ref(false);
 
 const rotationDuration = computed(
   () =>
@@ -47,14 +49,14 @@ const levelStyle = computed(() => {
 });
 
 const rotationStyle = computed(() => ({
-  animation: `orbit ${rotationDuration.value}s linear infinite`,
+  animation: `orbit ${rotationDuration.value}s linear infinite normal none ${isHovered.value ? 'paused' : 'running'}`,
 }));
 
 const counterRotationStyle = computed(() => ({
-  animation: `counterOrbit ${rotationDuration.value}s linear infinite`,
+  animation: `counterOrbit ${rotationDuration.value}s linear infinite normal none ${isHovered.value ? 'paused' : 'running'}`,
 }));
 
-function getItemStyle(index: number, totalItems: number, item: any) {
+function getItemStyle(index: number, totalItems: number) {
   const orbitRadius =
     (props.orbitSettings.diameter -
       props.orbitSettings.spacing * props.levelIndex) /
@@ -71,6 +73,12 @@ function getItemStyle(index: number, totalItems: number, item: any) {
     width: `${props.styleSettings.orbitLevelDiameter}px`,
   };
 }
+
+function getItemCustomClass(item: CustomClass) {
+  return item.border
+    ? item.border
+    : 'border-2 border-gray-800 hover:border-white';
+}
 </script>
 <template>
   <div
@@ -84,22 +92,26 @@ function getItemStyle(index: number, totalItems: number, item: any) {
       :glow="orbitSettings.glow"
       :rotation-duration="getLightRotationDuration"
     />
-
     <div class="relative h-full w-full" :style="rotationStyle">
       <template v-for="(item, index) in levelData" :key="index">
         <div
-          class="absolute flex cursor-pointer items-center justify-center rounded-full border-2 border-gray-800 hover:border-white transition-all duration-300 hover:z-10"
-          :class="styleSettings.orbitColor"
-          :style="getItemStyle(index, levelData.length, item)"
+          class="absolute flex cursor-pointer items-center justify-center rounded-full transition-all duration-300 hover:z-10"
+          :class="[
+            styleSettings.orbitColor,
+            getItemCustomClass(item?.customClass ?? {}),
+          ]"
+          :style="getItemStyle(index, levelData.length)"
         >
           <div
             class="origin-center h-full w-full flex justify-center items-center"
             :style="counterRotationStyle"
+            @mouseenter="isHovered = true"
+            @mouseleave="isHovered = false"
           >
             <OrbitDynamicContent
               :type="item?.type"
               :content="item?.content"
-              :class="item?.class"
+              :class="item?.customClass?.content"
               :alt="item?.alt"
               :href="item?.href"
             />
