@@ -20,10 +20,11 @@ export interface OrbitalElement {
   content?: string;
   style?: ElementStyle;
   href?: string;
+  callback?: Function;
   alt?: string;
 }
 
-export interface OrbitalTheme {
+export interface OrbitalUI {
   background?: string;
   border?: BorderStyle;
   glow?: GlowStyle;

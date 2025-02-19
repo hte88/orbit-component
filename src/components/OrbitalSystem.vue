@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, type PropType } from 'vue';
 import OrbitalRing from './OrbitalRing.vue';
-import type { OrbitalElement, OrbitalTheme } from '../types/orbit.ts';
+import type { OrbitalElement, OrbitalUI } from '../types/orbit.ts';
 
 const props = defineProps({
   rings: {
@@ -37,8 +37,8 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  theme: {
-    type: Object as PropType<OrbitalTheme>,
+  ui: {
+    type: Object as PropType<OrbitalUI>,
     default: () => ({
       glow: {
         center: '#FFFFFF',
@@ -68,11 +68,11 @@ const orbitSettings = computed(() => ({
 }));
 
 const styleSettings = computed(() => ({
-  background: props.theme.background,
-  glowStyle: props.theme.glow,
+  background: props.ui.background,
+  glowStyle: props.ui.glow,
   elementDiameter: props.elementDiameter,
-  borderColor: props.theme.border?.color,
-  borderOpacity: props.theme.border?.opacity,
+  borderColor: props.ui.border?.color,
+  borderOpacity: props.ui.border?.opacity,
 }));
 </script>
 
