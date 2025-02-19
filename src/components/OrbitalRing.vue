@@ -2,7 +2,7 @@
 import { computed, ref, type PropType } from 'vue';
 import RingBorder from './RingBorder.vue';
 import OrbitalElement from './OrbitalElement.vue';
-import type { OrbitalElement as OrbitalElementType } from '../models/orbit.ts';
+import type { OrbitalElement as OrbitalElementType } from '../types/orbit.ts';
 
 const DEFAULT_BORDER_CLASS = 'border-2 border-gray-800 hover:border-white';
 

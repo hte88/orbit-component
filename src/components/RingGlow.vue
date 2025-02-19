@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, type PropType } from 'vue';
-import type { GlowStyle } from '../models/orbit';
+import type { GlowStyle } from '../types/orbit';
 
 const props = defineProps({
   color: {

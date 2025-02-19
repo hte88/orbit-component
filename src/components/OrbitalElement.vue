@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
 import OrbitalLink from './OrbitalLink.vue';
-import type { OrbitalElement } from '../models/orbit';
+import type { OrbitalElement } from '../types/orbit';
 
 defineProps<OrbitalElement>();
 </script>

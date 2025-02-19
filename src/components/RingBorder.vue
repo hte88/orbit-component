@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { type PropType } from 'vue';
 import RingGlow from './RingGlow.vue';
-import type { GlowStyle } from '../models/orbit';
+import type { GlowStyle } from '../types/orbit';
 
 defineProps({
   color: {

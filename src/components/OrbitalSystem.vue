@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, type PropType } from 'vue';
 import OrbitalRing from './OrbitalRing.vue';
-import type { OrbitalElement, OrbitalTheme } from '../models/orbit.ts';
+import type { OrbitalElement, OrbitalTheme } from '../types/orbit.ts';
 
 const props = defineProps({
   rings: {
