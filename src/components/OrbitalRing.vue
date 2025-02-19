@@ -81,6 +81,16 @@ function getElementStyle(index: number, totalElements: number) {
 function getElementBorderClass(element: OrbitalElementType) {
   return element.style?.border || DEFAULT_BORDER_CLASS;
 }
+
+function handleCallback(element: OrbitalElementType) {
+  if (!element.callback) return;
+  if (typeof element.callback === 'function') {
+    element.callback();
+    return;
+  }
+  console.warn('Orbital: callback is neither a function !');
+  return;
+}
 </script>
 
 <template>
@@ -107,6 +117,7 @@ function getElementBorderClass(element: OrbitalElementType) {
             :style="counterRotationStyle"
             @mouseenter="isHovered = true"
             @mouseleave="isHovered = false"
+            @click="handleCallback(element)"
           >
             <OrbitalElement v-bind="element" />
           </div>
