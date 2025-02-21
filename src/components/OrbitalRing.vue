@@ -29,9 +29,19 @@ const {
 
 const isHovered = ref(false);
 
+const animationState = computed(() => (isHovered.value ? 'paused' : 'running'));
+
 const rotationDuration = computed(
   () => rotationSpeed + props.ringIndex * speedMultiplier,
 );
+
+const elementRotationStyle = computed(() => ({
+  animation: `counterOrbit ${rotationDuration.value}s linear infinite normal none ${animationState.value}`,
+}));
+
+const ringRotationStyle = computed(() => ({
+  animation: `orbit ${rotationDuration.value}s linear infinite normal none ${animationState.value}`,
+}));
 
 const glowRotationDuration = computed(
   () => rotationDuration.value / glowRotationRatio,
@@ -48,12 +58,6 @@ const ringStyle = computed(() => {
   };
 });
 
-const animationState = computed(() => (isHovered.value ? 'paused' : 'running'));
-
-const rotationStyle = computed(() => ({
-  animation: `orbit ${rotationDuration.value}s linear infinite normal none ${animationState.value}`,
-}));
-
 const countElements = computed(() => props.rings.length);
 </script>
 
@@ -65,9 +69,11 @@ const countElements = computed(() => props.rings.length);
       :enable-glow="enableGlow"
       :rotation-duration="glowRotationDuration"
     />
-    <div class="relative h-full w-full" :style="rotationStyle">
+    <div class="relative h-full w-full" :style="ringRotationStyle">
       <template v-for="(element, index) in rings" :key="index">
         <OrbitalWrapperElement
+          v-model:is-hovered="isHovered"
+          :element-rotation-style="elementRotationStyle"
           :element="element"
           :index="index"
           :ring-index="ringIndex"

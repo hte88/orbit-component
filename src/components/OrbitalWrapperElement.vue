@@ -1,14 +1,20 @@
 <script setup lang="ts">
-import { computed, ref, type PropType } from 'vue';
-import type { OrbitalElement, ElementStyle } from '../types/orbit.ts';
+import { type PropType } from 'vue';
+import type { OrbitalElement } from '../types/orbit.ts';
 import { useOrbitalSystem } from '../composables/orbital.ts';
+
+const isHovered = defineModel('is-hovered');
 
 const props = defineProps({
   element: {
     type: Object as PropType<OrbitalElement>,
     required: true,
   },
-   ringIndex: {
+  elementRotationStyle: {
+    type: Object,
+    required: true,
+  },
+  ringIndex: {
     type: Number,
     required: true,
   },
@@ -22,26 +28,7 @@ const props = defineProps({
   },
 });
 
-const {
-  rotationSpeed,
-  speedMultiplier,
-  systemDiameter,
-  ringSpacing,
-  elementDiameter,
-  ui,
-} = useOrbitalSystem();
-
-const isHovered = ref(false);
-
-const animationState = computed(() => (isHovered.value ? 'paused' : 'running'));
-
-const rotationDuration = computed(
-  () => rotationSpeed + props.ringIndex * speedMultiplier,
-);
-
-const counterRotationStyle = computed(() => ({
-  animation: `counterOrbit ${rotationDuration.value}s linear infinite normal none ${animationState.value}`,
-}));
+const { systemDiameter, ringSpacing, elementDiameter, ui } = useOrbitalSystem();
 
 function getElementStyle(index: number, totalElements: number) {
   const radius = (systemDiameter - ringSpacing * props.ringIndex) / 2;
@@ -80,7 +67,7 @@ function handleCallback(element: OrbitalElement) {
   >
     <div
       class="origin-center h-full w-full flex justify-center items-center"
-      :style="counterRotationStyle"
+      :style="elementRotationStyle"
       @mouseenter="isHovered = true"
       @mouseleave="isHovered = false"
       @click="handleCallback(element)"
