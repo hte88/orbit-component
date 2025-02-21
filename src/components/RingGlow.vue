@@ -3,15 +3,7 @@ import { computed, type PropType } from 'vue';
 import type { GlowStyle } from '../types/orbit';
 
 const props = defineProps({
-  color: {
-    type: String,
-    required: true,
-  },
-  opacity: {
-    type: Number,
-    default: 0.3,
-  },
-  glowStyle: {
+  glowUi: {
     type: Object as PropType<GlowStyle>,
     required: true,
   },
@@ -21,16 +13,16 @@ const props = defineProps({
   },
 });
 
-const glowStyle = computed(() => ({
+const glowUi = computed(() => ({
   animation: `borderLight ${props.rotationDuration}s linear infinite`,
   background: `
     linear-gradient(45deg,
       transparent 0%,
       transparent 35%,
-      ${props.glowStyle.edge} 40%,
-      ${props.glowStyle.center} 47%,
-      ${props.glowStyle.center} 53%,
-      ${props.glowStyle.edge} 60%,
+      ${props.glowUi.secondary} 40%,
+      ${props.glowUi.primary} 47%,
+      ${props.glowUi.primary} 53%,
+      ${props.glowUi.secondary} 60%,
       transparent 65%,
       transparent 100%
     ) border-box
@@ -47,6 +39,6 @@ const glowStyle = computed(() => ({
 <template>
   <div
     class="absolute inset-0 rounded-full border-2 border-transparent"
-    :style="glowStyle"
+    :style="glowUi"
   />
 </template>

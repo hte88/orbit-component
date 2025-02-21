@@ -1,13 +1,12 @@
 export type ContentType = 'icon' | 'string' | 'image';
 
 export interface BorderStyle {
-  color?: string;
-  opacity?: number;
+  base?: string;
 }
 
 export interface GlowStyle {
-  center?: string;
-  edge?: string;
+  primary?: string;
+  secondary?: string;
 }
 
 export interface ElementStyle {
@@ -25,7 +24,22 @@ export interface OrbitalElement {
 }
 
 export interface OrbitalUI {
-  background?: string;
-  border?: BorderStyle;
-  glow?: GlowStyle;
+  wrapper: string;
+  background: string;
+  border: BorderStyle;
+  glow: GlowStyle;
+  element?: ElementStyle;
+}
+
+export interface OrbitalSystem {
+  rings: OrbitalElement[][],
+  systemDiameter: number,
+  ringSpacing: number,
+  rotationSpeed: number,
+  speedMultiplier: number,
+  glowRotationRatio: number,
+  elementDiameter: number,
+  enableGlow: boolean,
+  ui: OrbitalUI,
+
 }

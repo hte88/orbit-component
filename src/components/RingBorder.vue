@@ -4,19 +4,15 @@ import RingGlow from './RingGlow.vue';
 import type { GlowStyle } from '../types/orbit';
 
 defineProps({
-  color: {
-    type: String,
+  borderUi: {
+    type: Object,
     required: true,
-  },
-  opacity: {
-    type: Number,
-    default: 1,
   },
   enableGlow: {
     type: Boolean,
     default: true,
   },
-  glowStyle: {
+  glowUi: {
     type: Object as PropType<GlowStyle>,
     required: true,
   },
@@ -29,18 +25,10 @@ defineProps({
 
 <template>
   <div>
-    <div
-      class="absolute inset-0 rounded-full border-2"
-      :style="{
-        borderColor: color,
-        opacity: opacity,
-      }"
-    />
+    <div class="absolute inset-0 rounded-full" :class="borderUi.base" />
     <RingGlow
       v-if="enableGlow"
-      :color="color"
-      :opacity="opacity"
-      :glow-style="glowStyle"
+      :glow-ui="glowUi"
       :rotation-duration="rotationDuration"
     />
   </div>
