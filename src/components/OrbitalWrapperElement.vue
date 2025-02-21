@@ -58,7 +58,7 @@ function getElementStyle(index: number, totalElements: number) {
   };
 }
 function getElementBorderClass(element: OrbitalElement) {
-  return element?.style?.border || ui.element?.border;
+  return element.style?.border || ui.element?.border;
 }
 
 function handleCallback(element: OrbitalElement) {
