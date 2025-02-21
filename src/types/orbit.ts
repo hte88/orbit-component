@@ -32,14 +32,13 @@ export interface OrbitalUI {
 }
 
 export interface OrbitalSystem {
-  rings: OrbitalElement[][],
-  systemDiameter: number,
-  ringSpacing: number,
-  rotationSpeed: number,
-  speedMultiplier: number,
-  glowRotationRatio: number,
-  elementDiameter: number,
-  enableGlow: boolean,
-  ui: OrbitalUI,
-
+  rings: OrbitalElement[][];
+  systemDiameter: number;
+  ringSpacing: number;
+  rotationSpeed: number;
+  speedMultiplier: number;
+  glowRotationRatio: number;
+  elementDiameter: number;
+  enableGlow: boolean;
+  ui: OrbitalUI;
 }

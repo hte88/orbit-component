@@ -1,9 +1,9 @@
 // composables/useOrbitalSystem.ts
 import { ref } from 'vue';
-import type {  OrbitalSystem } from '../types/orbit';
-import {merge} from 'lodash';
+import type { OrbitalSystem } from '../types/orbit';
+import { merge } from 'lodash';
 
-const defaultOptions:OrbitalSystem = {
+const defaultOptions: OrbitalSystem = {
   rings: [],
   systemDiameter: 300,
   ringSpacing: 100,
@@ -28,13 +28,14 @@ const defaultOptions:OrbitalSystem = {
   },
 };
 
-const sharedConfig  = ref<OrbitalSystem>({...defaultOptions})
+const sharedConfig = ref<OrbitalSystem>({ ...defaultOptions });
 
-
-export function useOrbitalSystem(options: Partial<OrbitalSystem> = {}, useSharedState = true) {
-
+export function useOrbitalSystem(
+  options: Partial<OrbitalSystem> = {},
+  useSharedState = true,
+) {
   if (useSharedState && Object.keys(options).length) {
-    sharedConfig.value = merge({} , defaultOptions, options);
+    sharedConfig.value = merge({}, defaultOptions, options);
   }
 
   return {
