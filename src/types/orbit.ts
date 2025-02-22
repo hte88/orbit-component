@@ -37,6 +37,7 @@ export interface OrbitalSystem {
   ringSpacing: number;
   rotationSpeed: number;
   rotationReversed?: boolean;
+  glowRotationReversed?: boolean;
   speedMultiplier: number;
   glowRotationRatio: number;
   elementDiameter: number;
