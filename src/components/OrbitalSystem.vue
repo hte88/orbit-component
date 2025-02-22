@@ -15,6 +15,7 @@ useOrbitalSystem({
   rings: props.rings,
   rotationSpeed: props.rotationSpeed,
   rotationReversed:props.rotationReversed,
+  glowRotationReversed:props.rotationReversed,
   speedMultiplier: props.speedMultiplier,
   glowRotationRatio: props.glowRotationRatio,
   systemDiameter: props.systemDiameter,
@@ -33,7 +34,7 @@ useOrbitalSystem({
   </div>
 </template>
 <style>
-@keyframes orbit {
+@keyframes rightHandRotation {
   from {
     transform: rotate(0deg);
   }
@@ -42,7 +43,7 @@ useOrbitalSystem({
   }
 }
 
-@keyframes counterOrbit {
+@keyframes leftHandRotation {
   from {
     transform: rotate(0deg);
   }
@@ -51,12 +52,4 @@ useOrbitalSystem({
   }
 }
 
-@keyframes borderLight {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 </style>

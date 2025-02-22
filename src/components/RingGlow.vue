@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, type PropType } from 'vue';
 import type { GlowStyle } from '../types/orbit';
+import { useOrbitalSystem } from '../composables/orbital';
 
 const props = defineProps({
   glowUi: {
@@ -13,8 +14,12 @@ const props = defineProps({
   },
 });
 
+const { glowRotationReversed } = useOrbitalSystem();
+
+const directionRotation = computed(()=> glowRotationReversed ? 'leftHandRotation' : 'rightHandRotation')
+
 const glowUi = computed(() => ({
-  animation: `borderLight ${props.rotationDuration}s linear infinite`,
+  animation: `${directionRotation.value} ${props.rotationDuration}s linear infinite normal`,
   background: `
     linear-gradient(45deg,
       transparent 0%,

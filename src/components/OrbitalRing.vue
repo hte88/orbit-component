@@ -37,11 +37,11 @@ const rotationDuration = computed(
 );
 
 const elementRotationStyle = computed(() => ({
-  animation: `counterOrbit ${rotationDuration.value}s linear infinite normal none ${animationState.value}`,
+  animation: `leftHandRotation ${rotationDuration.value}s linear infinite normal none ${animationState.value}`,
 }));
 
 const ringRotationStyle = computed(() => ({
-  animation: `orbit ${rotationDuration.value}s linear infinite normal none ${animationState.value}`,
+  animation: `rightHandRotation ${rotationDuration.value}s linear infinite normal none ${animationState.value}`,
 }));
 
 
