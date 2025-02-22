@@ -19,7 +19,7 @@ defineProps<OrbitalElement>();
         <Icon
           v-else-if="type === 'icon'"
           :icon="content || ''"
-          :class="style?.content"
+          :class="style?.content ?? 'h-full w-full p-1'"
         />
 
         <img

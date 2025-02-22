@@ -14,8 +14,8 @@ const containerStyle = computed(() => ({
 useOrbitalSystem({
   rings: props.rings,
   rotationSpeed: props.rotationSpeed,
-  rotationReversed:props.rotationReversed,
-  glowRotationReversed:props.rotationReversed,
+  rotationReversed: props.rotationReversed,
+  glowRotationReversed: props.rotationReversed,
   speedMultiplier: props.speedMultiplier,
   glowRotationRatio: props.glowRotationRatio,
   systemDiameter: props.systemDiameter,
@@ -51,5 +51,4 @@ useOrbitalSystem({
     transform: rotate(-360deg);
   }
 }
-
 </style>

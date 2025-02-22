@@ -64,13 +64,13 @@ function handleCallback(element: OrbitalElement) {
     class="absolute flex cursor-pointer items-center justify-center rounded-full transition-all duration-300"
     :class="[ui.background, getElementBorderClass(element)]"
     :style="getElementStyle(index, countElements)"
+    @mouseenter="isHovered = true"
+    @mouseleave="isHovered = false"
+    @click="handleCallback(element)"
   >
     <div
       class="origin-center h-full w-full flex justify-center items-center"
       :style="elementRotationStyle"
-      @mouseenter="isHovered = true"
-      @mouseleave="isHovered = false"
-      @click="handleCallback(element)"
     >
       <slot />
     </div>

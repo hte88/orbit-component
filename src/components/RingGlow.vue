@@ -16,7 +16,9 @@ const props = defineProps({
 
 const { glowRotationReversed } = useOrbitalSystem();
 
-const directionRotation = computed(()=> glowRotationReversed ? 'leftHandRotation' : 'rightHandRotation')
+const directionRotation = computed(() =>
+  glowRotationReversed ? 'leftHandRotation' : 'rightHandRotation',
+);
 
 const glowUi = computed(() => ({
   animation: `${directionRotation.value} ${props.rotationDuration}s linear infinite normal`,

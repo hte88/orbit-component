@@ -44,7 +44,6 @@ const ringRotationStyle = computed(() => ({
   animation: `rightHandRotation ${rotationDuration.value}s linear infinite normal none ${animationState.value}`,
 }));
 
-
 const glowRotationDuration = computed(
   () => rotationDuration.value / glowRotationRatio,
 );
@@ -71,11 +70,16 @@ const countElements = computed(() => props.rings.length);
       :enable-glow="enableGlow"
       :rotation-duration="glowRotationDuration"
     />
-    <div class="relative h-full w-full" :style="rotationReversed ? elementRotationStyle : ringRotationStyle">
+    <div
+      class="relative h-full w-full"
+      :style="rotationReversed ? elementRotationStyle : ringRotationStyle"
+    >
       <template v-for="(element, index) in rings" :key="index">
         <OrbitalWrapperElement
           v-model:is-hovered="isHovered"
-          :element-rotation-style="rotationReversed ? ringRotationStyle : elementRotationStyle"
+          :element-rotation-style="
+            rotationReversed ? ringRotationStyle : elementRotationStyle
+          "
           :element="element"
           :index="index"
           :ring-index="ringIndex"
