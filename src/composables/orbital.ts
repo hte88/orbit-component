@@ -9,6 +9,7 @@ const defaultOptions: OrbitalSystem = {
   ringSpacing: 100,
   rotationSpeed: 30,
   rotationReversed:false,
+  glowRotationReversed:false,
   speedMultiplier: 1,
   glowRotationRatio: 2.5,
   elementDiameter: 30,
