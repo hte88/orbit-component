@@ -5,9 +5,9 @@ Un système de navigation orbital dynamique et personnalisable pour Vue 3. Ce co
 ## 🚀 Installation
 
 ```bash
-npm install orbital-navigation-system
+...
 # ou
-yarn add orbital-navigation-system
+...
 ```
 
 ## 📋 Prérequis
